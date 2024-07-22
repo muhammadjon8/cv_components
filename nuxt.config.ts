@@ -8,5 +8,11 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@nuxt/icon",
+    "@pinia/nuxt",
+    "@pinia-plugin-persistedstate/nuxt",
+  ],
   css: ["~/assets/css/main.css"],
 });
