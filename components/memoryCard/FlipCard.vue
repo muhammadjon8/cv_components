@@ -11,12 +11,13 @@ const props = defineProps({
 
 const store = usePiniaStore();
 const isFlipped = ref(false);
+const isProcessing = ref(false);  // Lock to prevent multiple simultaneous clicks
 
 const flipCard = (data) => {
-  if (data.done || data.isFound) return; // If card is already done or currently found, do nothing
+  if (isProcessing.value || data.done || data.isFound) return; // Prevent action if locked, already done, or found
 
-  if (store.founded.length % 2 == 0) {
-    data.isFound = true;
+  if (store.founded.length % 2 === 0) {
+    data.isFound = !data.isFound;
     store.addFounded(data);
   } else {
     const lastCard = store.founded[store.founded.length - 1];
@@ -26,10 +27,12 @@ const flipCard = (data) => {
       data.done = true;
       store.addFounded(data);
     } else {
+      isProcessing.value = true;  // Lock further actions
       setTimeout(() => {
         data.isFound = false;
         lastCard.isFound = false;
         store.clearFounded();
+        isProcessing.value = false;  // Unlock after processing
       }, 500); // Adds a delay before flipping back the cards
     }
   }
@@ -101,4 +104,3 @@ const flipCard = (data) => {
   border-radius: 10px;
 }
 </style>
-
