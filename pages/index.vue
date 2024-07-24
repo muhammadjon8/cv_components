@@ -138,9 +138,9 @@ onMounted(() => {
           :data="item"
         />
       </div>
-      <div class="w-1/2">
+      <!-- <div class="w-1/2">
         <img src="/myImage.png" alt="" class="h-[600px] w-full">
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

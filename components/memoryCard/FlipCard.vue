@@ -36,6 +36,7 @@ const flipCard = (data) => {
       }, 500); // Adds a delay before flipping back the cards
     }
   }
+  return false; // Prevent default click event to flip the card
 };
 </script>
 
