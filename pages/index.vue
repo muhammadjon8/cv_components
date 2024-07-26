@@ -7,7 +7,8 @@ import CardGame from "../components/memoryCard/CardGame.vue";
   <div>
     <!-- <CardGame /> -->
     <!-- <ChengalchukGame /> -->
-    <DoYouLikeIt />
+    <!-- <DoYouLikeIt /> -->
+    <TicTacToe />
   </div>
 </template>
 
