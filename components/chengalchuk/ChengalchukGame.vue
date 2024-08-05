@@ -1,6 +1,7 @@
 <template>
-  <div class="container flex justify-center flex-col items-center gap-5">
-    <div class="flex items-center mb-9">
+  <div class="container flex justify-center items-center gap-6">
+    <div class="flex flex-col justify-center items-center gap-5">
+      <div class="flex items-center mb-9">
       <img src="/rock-paper-scissors-icon.png" alt="" class="size-32" />
       <h2 class="text-3xl text-yellow-500">Rock Paper Scissors Game</h2>
     </div>
@@ -31,9 +32,9 @@
           {{ userChoice }}
         </p>
       </div>
-      <div v-if="isFightStarted" >
+      <div v-if="isFightStarted">
         <p class="text-center">Mine is</p>
-        <p class="text-center text-5xl" v-if="isFightStarted">
+        <p class="text-center text-5xl" v-if="myChoice">
           <img :src="myChoice.img" :alt="myChoice.label" class="size-60" />
         </p>
       </div>
@@ -53,6 +54,10 @@
       <div>
         <p class="text-center">Ties: {{ state.ties }}</p>
       </div>
+    </div>
+    </div>
+    <div v-if="state.wins >= 5" class="w-1/2 flex items-center justify-center bg-green-500 bg-opacity-75 py-5">
+      <p class="text-5xl text-white">You won!</p>
     </div>
   </div>
 </template>
@@ -99,7 +104,6 @@ const startFight = () => {
   setTimeout(() => {
     myChoice.value = images.value[Math.floor(Math.random() * 3)];
     calculateResult();
-    updateTotalResults();
   }, 1000);
 };
 
@@ -112,22 +116,29 @@ const calculateResult = () => {
     "🖐️": { "✊": "You win!", "🖐️": "It's a tie!", "✌️": "You lose!" },
     "✌️": { "✊": "You lose!", "🖐️": "You win!", "✌️": "It's a tie!" },
   };
-  setTimeout(() => {
-    result.value = outcomes[user][computer];
-  }, 100);
+  result.value = outcomes[user][computer];
+  updateTotalResults();
 };
 
 const updateTotalResults = () => {
-  if (result.value.includes("You win!")) {
+  if (result.value === "You win!") {
     state.wins += 1;
-  } else if (result.value.includes("You lose!")) {
+  } else if (result.value === "You lose!") {
     state.losses += 1;
-  } else if (result.value.includes("It's a tie!")) {
+  } else if (result.value === "It's a tie!") {
     state.ties += 1;
   }
 };
 </script>
 
 <style>
+.size-32 {
+  width: 32px;
+  height: 32px;
+}
 
+.size-60 {
+  width: 60px;
+  height: 60px;
+}
 </style>

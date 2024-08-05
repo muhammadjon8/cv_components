@@ -5,10 +5,10 @@ import CardGame from "../components/memoryCard/CardGame.vue";
 
 <template>
   <div>
-    <!-- <CardGame /> -->
-    <!-- <ChengalchukGame /> -->
-    <!-- <DoYouLikeIt /> -->
+    <CardGame />
+    <ChengalchukGame />
     <TicTacToe />
+    <DoYouLikeIt />
   </div>
 </template>
 
